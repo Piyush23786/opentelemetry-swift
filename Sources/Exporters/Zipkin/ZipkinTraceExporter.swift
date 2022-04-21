@@ -9,7 +9,7 @@ import OpenTelemetrySdk
 public class ZipkinTraceExporter: SpanExporter {
     public var options: ZipkinTraceExporterOptions
     var localEndPoint: ZipkinEndpoint
-
+    var timestamp = generateCurrentTimeStamp()
     public init(options: ZipkinTraceExporterOptions) {
         self.options = options
         localEndPoint = ZipkinTraceExporter.getLocalZipkinEndpoint(name: options.serviceName)
@@ -41,8 +41,8 @@ public class ZipkinTraceExporter: SpanExporter {
                 status = .failure
             } else {
                 status = .success
-                let fileName4 = "successfullysentspans \(timestamp)"
-                save(text:("\(spans)"), toDirectory: documentDirectory(), withFileName: fileName4)
+                let fileName4 = "successfullysentspans \(self.timestamp)"
+                self.save(text:("\(spans)"), toDirectory: documentDirectory(), withFileName: fileName4)
             }
             sem.signal()
         }
