@@ -25,7 +25,8 @@ public class ZipkinTraceExporter: SpanExporter {
         options.additionalHeaders.forEach {
             request.addValue($0.value, forHTTPHeaderField: $0.key)
         }
-
+        let timestamp = NSDate().timeIntervalSince1970
+        print("timestamp",\(timestamp))
         let spans = encodeSpans(spans: spans)
         do {
             request.httpBody = try JSONEncoder().encode(spans)
@@ -42,8 +43,7 @@ public class ZipkinTraceExporter: SpanExporter {
                 status = .failure
             } else {
                 status = .success
-                let timestamp = self.generateCurrentTimeStamp
-                let fileName4 = "successfully_sent_spans \(timestamp)"
+                let fileName4 = "successfully_sent_spans\(timestamp)"
                 self.save(text:("\(spans)"), toDirectory: self.documentDirectory(), withFileName: fileName4)
             }
             sem.signal()
