@@ -13,7 +13,7 @@ public class ZipkinTraceExporter: SpanExporter {
     public init(options: ZipkinTraceExporterOptions) {
         self.options = options
         localEndPoint = ZipkinTraceExporter.getLocalZipkinEndpoint(name: options.serviceName)
-        timestamp = generateCurrentTimeStamp()
+        timestamp = self.generateCurrentTimeStamp()
     }
 
     public func export(spans: [SpanData]) -> SpanExporterResultCode {
