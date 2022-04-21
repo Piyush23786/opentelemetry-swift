@@ -42,7 +42,7 @@ public class ZipkinTraceExporter: SpanExporter {
                 status = .failure
             } else {
                 status = .success
-                let fileName4 = "successfully_sent_spans"
+                let fileName4 = "successfully_sent_spans \(self.generateCurrentTimeStamp)"
                 self.save(text:("\(spans)"), toDirectory: self.documentDirectory(), withFileName: fileName4)
             }
             sem.signal()
@@ -75,6 +75,11 @@ public class ZipkinTraceExporter: SpanExporter {
         #endif
     }
     
+    func generateCurrentTimeStamp () -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy_MM_dd_hh_mm_ss"
+        return (formatter.string(from: Date()) as NSString) as String
+    }
     
     public func documentDirectory() -> String {
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
