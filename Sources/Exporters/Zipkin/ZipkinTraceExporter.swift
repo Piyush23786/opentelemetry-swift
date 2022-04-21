@@ -43,7 +43,7 @@ public class ZipkinTraceExporter: SpanExporter {
                 status = .failure
             } else {
                 status = .success
-                let fileName4 = "successfully_sent_spans\(timestamp)"
+                let fileName4 = "\(timestamp)_successfully_sent_spans.txt"
                 self.save(text:("\(spans)"), toDirectory: self.documentDirectory(), withFileName: fileName4)
             }
             sem.signal()
