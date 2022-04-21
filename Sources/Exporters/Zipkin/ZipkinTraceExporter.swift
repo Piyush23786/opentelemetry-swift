@@ -26,7 +26,7 @@ public class ZipkinTraceExporter: SpanExporter {
             request.addValue($0.value, forHTTPHeaderField: $0.key)
         }
         let timestamp = NSDate().timeIntervalSince1970
-        println( "timestamp: \(timestamp)" );
+        print( "timestamp: \(timestamp)" );
         let spans = encodeSpans(spans: spans)
         do {
             request.httpBody = try JSONEncoder().encode(spans)
