@@ -6,7 +6,7 @@
 import Foundation
 
 #if canImport(_Concurrency)
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, *)
+@available(macOS 11.0, iOS 15.0, tvOS 15.0, *)
 enum ContextManagement {
     @TaskLocal
     static var span: Span?
